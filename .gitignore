@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.venv/
+.ruff_cache/
+data/
+runs/
+checkpoints/
+cache/

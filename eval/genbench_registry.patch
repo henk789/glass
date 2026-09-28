@@ -1,0 +1,20 @@
+--- a/src/lemat_genbench/models/registry.py
++++ b/src/lemat_genbench/models/registry.py
+@@ -209,7 +209,7 @@
+         """
+         return self._model_availability.get(model_name, False)
+ 
+-    def create_calculator(self, model_name: str, **kwargs) -> BaseMLIPCalculator:
++    def create_calculator(self, model_name: str, /, **kwargs) -> BaseMLIPCalculator:
+         """Create a calculator for the specified model type.
+ 
+         You can see which models are available in your current version of ``forgebench``
+@@ -278,7 +278,7 @@
+ _registry = ModelRegistry()
+ 
+ 
+-def get_calculator(model_name: str, **kwargs) -> BaseMLIPCalculator:
++def get_calculator(model_name: str, /, **kwargs) -> BaseMLIPCalculator:
+     """Get a calculator for the specified model type.
+ 
+     This is the main entry point for creating calculators.

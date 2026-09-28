@@ -1,0 +1,59 @@
+# QMOF150 paper recipe: FP32 autoencoder, BF16 flow training and encoding, FP32 sampling.
+data:
+  dataset: qmof150
+  root: data/qmof150
+  workers: 8
+autoencoder:
+  model:
+    nmax: 150
+    dim: 256
+    latent_dim: 64
+    enc_depth: 4
+    dec_depth: 12
+    heads: 8
+    slot_dim: 32
+    coord_fourier_bands: 4
+  loss:
+    coord_weight: 1.0
+    type_weight: 0.05
+    lattice_weight: 5.0
+    pair_distance_weight: 0.5
+    pair_distance_inner: 3.0
+    pair_distance_cutoff: 5.0
+  train:
+    steps: 100000
+    batch_size: 256
+    lr: 0.0003
+    warmup: 1000
+    weight_decay: 0.0
+    betas: [0.9, 0.999]
+    eps: 1.0e-08
+    seed: 0
+    log_interval: 2000
+    checkpoint_interval: 10000
+flow:
+  model:
+    latent_dim: 64
+    hidden: 768
+    depth: 8
+  train:
+    steps: 1000000
+    batch_size: 1024
+    lr: 0.0003
+    warmup: 2000
+    weight_decay: 0.0
+    betas: [0.9, 0.999]
+    eps: 1.0e-08
+    ema_decay: 0.9999
+    seed: 0
+    bf16: true
+    encode_bf16: true
+    encode_batch_size: 1024
+    log_interval: 2000
+    checkpoint_interval: 10000
+# The benchmark samples: 10,000 structures from the final (1M-step) flow checkpoint.
+sample:
+  count: 10000
+  steps: 32
+  seed: 42
+  batch_size: 256
