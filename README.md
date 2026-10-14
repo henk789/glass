@@ -2,6 +2,8 @@
 
 Hendrik Kraß, Seyed Mohamad Moosavi, Mathias Niepert
 
+[![arXiv](https://img.shields.io/badge/arXiv-2609.37158-b31b1b.svg)](https://arxiv.org/abs/2609.37158)
+
 ![GLASS architecture](assets/architecture.png)
 
 GLASS encodes a crystal into one permutation-invariant latent vector and decodes it
